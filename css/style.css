@@ -11,6 +11,7 @@
   --accent-ink: #ffffff;
   --sun: #ffd84a;
   --sun-ink: #3a2c00;
+  --mark: #ffd84a;
   --ok: #17895c;
   --ok-bg: #e2f6ec;
   --bad: #c93b3b;
@@ -28,7 +29,7 @@
   :root:not([data-theme="light"]) {
     --paper: #17261f; --grid: rgba(255, 255, 255, 0.045); --card: #1f3229;
     --ink: #edf3ee; --muted: #a8b9af; --line: #34504a;
-    --accent: #ff8a5c; --accent-ink: #1a0f08; --sun: #f3cf4b; --sun-ink: #2b2200;
+    --accent: #ff8a5c; --accent-ink: #1a0f08; --sun: #f3cf4b; --sun-ink: #2b2200; --mark: rgba(243, 207, 75, 0.32);
     --ok: #52d495; --ok-bg: #173d2c; --bad: #ff7b7b; --bad-bg: #4a2222;
     --u1: #ff8a5c; --u2: #b597ff; --u3: #5cc4ef; --u4: #ff7fb0;
     --u5: #52d495; --u6: #f2b13c; --u7: #86a9ff; --u8: #ec86bb;
@@ -38,7 +39,7 @@
 :root[data-theme="dark"] {
   --paper: #17261f; --grid: rgba(255, 255, 255, 0.045); --card: #1f3229;
   --ink: #edf3ee; --muted: #a8b9af; --line: #34504a;
-  --accent: #ff8a5c; --accent-ink: #1a0f08; --sun: #f3cf4b; --sun-ink: #2b2200;
+  --accent: #ff8a5c; --accent-ink: #1a0f08; --sun: #f3cf4b; --sun-ink: #2b2200; --mark: rgba(243, 207, 75, 0.32);
   --ok: #52d495; --ok-bg: #173d2c; --bad: #ff7b7b; --bad-bg: #4a2222;
   --u1: #ff8a5c; --u2: #b597ff; --u3: #5cc4ef; --u4: #ff7fb0;
   --u5: #52d495; --u6: #f2b13c; --u7: #86a9ff; --u8: #ec86bb;
@@ -137,7 +138,7 @@ main:focus { outline: none; }
 
 /* ---------- home ---------- */
 .hero { display: grid; gap: 18px; padding-top: 8px; }
-.hero h1 span { background: linear-gradient(transparent 62%, var(--sun) 62%); padding-inline: 4px; }
+.hero h1 span { background: linear-gradient(transparent 62%, var(--mark) 62%); padding-inline: 4px; }
 .hero .lead { font-size: 1.1rem; color: var(--muted); max-width: 60ch; }
 .stats { display: flex; flex-wrap: wrap; gap: 10px; }
 .stat {
@@ -197,7 +198,7 @@ main:focus { outline: none; }
 .goals { margin: 0; padding: 14px 18px; list-style: none; display: grid; gap: 4px; border: 2px dashed var(--line); border-radius: 12px; }
 .goals li::before { content: "✓ "; color: var(--ok); font-weight: 700; }
 .section { display: grid; gap: 10px; }
-.section h3 { display: inline-block; justify-self: start; background: linear-gradient(transparent 58%, var(--sun) 58%); padding-inline: 4px; }
+.section h3 { display: inline-block; justify-self: start; background: linear-gradient(transparent 58%, var(--mark) 58%); padding-inline: 4px; }
 .section h3, .section h3 * { color: var(--ink); }
 .prose { display: grid; gap: 10px; max-width: 68ch; }
 .prose ul, .prose ol { margin: 0; padding-inline-start: 1.4em; display: grid; gap: 4px; }
