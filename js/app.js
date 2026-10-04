@@ -23,7 +23,7 @@
   function sumQuiz() { var s = 0; for (var k in progress.quiz) s += progress.quiz[k] * 2; return s; }
   function updatePoints(bump) {
     var el = document.getElementById("points");
-    el.textContent = toArabicDigits(points()) + " نقطة";
+    el.textContent = "نقاطك: " + toArabicDigits(points());
     if (bump) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
   }
   function markSolved(id) {
