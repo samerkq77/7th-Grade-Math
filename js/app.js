@@ -73,8 +73,22 @@
       .replace(/[۰-۹]/g, function (d) { return String(d.charCodeAt(0) - 0x6f0); })
       .replace(/[٫,]/g, ".").replace(/[−–—]/g, "-").replace(/÷/g, "/").replace(/\s+/g, " ").trim();
   }
+  var SUP = { "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4", "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9", "⁻": "-" };
+  // A power typed as 2^5, 2^-3, (-2)^3, (2/3)^2 or 2⁵ -> its value.
+  function parsePower(str) {
+    var s = str.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g, function (t) { return "^" + t.replace(/./g, function (c) { return SUP[c]; }); });
+    s = s.replace(/\s+/g, "").replace(/\*\*/g, "^");
+    if (s.indexOf("^") < 0) return null;
+    var m = s.match(/^(-?)(\(([^()]+)\)|\d*\.?\d+)\^\{?\(?(-?\d+)\)?\}?$/);
+    if (!m) return NaN;
+    var base = m[3] != null ? parseNum(m[3]) : parseFloat(m[2]);
+    var v = Math.pow(base, +m[4]);
+    return m[1] ? -v : v;
+  }
   function parseNum(raw) {
     if (typeof raw === "number") return raw;
+    var pw = parsePower(normalize(raw));
+    if (pw !== null) return pw;
     var s = normalize(raw).replace(/[^0-9.\-\/ ]/g, " ").replace(/\s+/g, " ").trim();
     s = s.replace(/\s*\/\s*/g, "/").replace(/-\s+/g, "-");
     var m;
@@ -209,7 +223,7 @@
         result(ok);
       });
       body.appendChild(row);
-      if (p.type !== "text") body.appendChild(h('<p class="input-help">يمكنك كتابة الكسر هكذا: 3/4، والعدد الكسري هكذا: 2 1/3</p>'));
+      if (p.type !== "text") body.appendChild(h('<p class="input-help">طريقة الكتابة: الكسر <span class="math">3/4</span>، العدد الكسري <span class="math">2 1/3</span>، القوة <span class="math">2^5</span> أو <span class="math">2^-3</span> (الرمز ^ موجود في لوحة المفاتيح مع الرقم 6)، أو اكتب الناتج مباشرة</p>'));
     }
 
     card.addEventListener("click", function (e) {
